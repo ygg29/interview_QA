@@ -1,12 +1,12 @@
 # interview_Q&A
 
+> [TOC]
+
 ## \#Q
 
+### iOS
 
-
-### **iOS**
-
-#### swift
+#### Swift
 
 1. 为什么 Apple 建议使用 `Struct`？有何特性？与 `Class` 对比好处在哪里？平常使用多么？ 为什么？★★★☆☆ 
 2. 高阶函数`map`、 `flatmap`、 `reduce`、 `filter`作用  `(进阶：自己实现map函数应该如何实现)`★★☆☆☆ 
