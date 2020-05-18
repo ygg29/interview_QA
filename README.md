@@ -25,17 +25,18 @@
 #### Swift
 
 1. 为什么 Apple 建议使用 `Struct`？有何特性？与 `Class` 对比好处在哪里？平常使用多么？ 为什么？★★★☆☆ 
-2. 高阶函数`map`、 `flatmap`、 `reduce`、 `filter`作用  `(进阶：自己实现map函数应该如何实现)`★★☆☆☆ 
-3. `String` 和 `NSString` 的区别和联系★★☆☆☆ 
-4. `associatedType` 的作用？简述其与泛型的区别★★☆☆☆ 
-5. `open`和`public`的区别★★☆☆☆ 
-6. 闭包与函数的区别★★☆☆☆ 
-7. [`optional`原理与实现机制](#optional原理与实现机制) ★★☆☆☆ 
-8. 定义静态方法时关键字`static`和`class`有什么区别? ★☆☆☆☆ 
-9. `Swift`中的`Error`与`OC`的`NSError`相互转化时发生了什么? ★★★☆☆ 
-10. `Swift method dispatch` ★★★☆☆ 
-11. [swift 单例的实现，是如何保证线程安全的](https://juejin.im/post/59e30701f265da432f3026ad)★★☆☆☆ 
-12. [关于swift与OC多说两句](#关于swift与OC多说两句)
+2. swift的具有快速、安全、简洁的特点，[swift快在哪儿](#swift快在哪儿)？
+3. 高阶函数`map`、 `flatmap`、 `reduce`、 `filter`作用  `(进阶：自己实现map函数应该如何实现)`★★☆☆☆ 
+4. `String` 和 `NSString` 的区别和联系★★☆☆☆ 
+5. `associatedType` 的作用？简述其与泛型的区别★★☆☆☆ 
+6. `open`和`public`的区别★★☆☆☆ 
+7. 闭包与函数的区别★★☆☆☆ 
+8. [`optional`原理与实现机制](#optional原理与实现机制) ★★☆☆☆ 
+9. 定义静态方法时关键字`static`和`class`有什么区别? ★☆☆☆☆ 
+10. `Swift`中的`Error`与`OC`的`NSError`相互转化时发生了什么? ★★★☆☆ 
+11. `Swift method dispatch` ★★★☆☆ 
+12. [swift 单例的实现，是如何保证线程安全的](https://juejin.im/post/59e30701f265da432f3026ad)★★☆☆☆ 
+13. [关于swift与OC多说两句](#关于swift与OC多说两句)
 
 #### 基础
 
@@ -43,25 +44,42 @@
 2. [悬垂指针、野指针分别指什么？](#悬垂指针、野指针分别指什么)
 3. `weak`原理和实现★★★☆☆
 4. 什么时候使用`copy`修饰符? ★★☆☆☆
-5. 邮`roperty(copy, nonautomic) NSMutableArray *array`;会出现什么问题? ★★☆☆☆ 
+5. `property(copy, nonautomic) NSMutableArray *array`;会出现什么问题? ★★☆☆☆ 
 6. 介绍一下对深拷贝和浅拷贝的理解★★★☆☆ 
 7. `ARC`和 `MRC`的 区 别 ★★★☆☆ 
 8. `ARC`和 `GC`的 区 別 ★★★☆☆
   - 平时怎么使用 `AutoreleasePool`? ★★★☆☆
   - 不手动指定`AutoreleasePool`的前提下，一个`AutoreleasePool`对象在什么时刻释放? (比如在一个VC的`viewDidLoad`中创建的局部变里) ★ ★ ★ ☆ ☆ 
 9. `AutoreleasePool` 和 `RunLoop` 有什么关系? ★★★★☆
+
 10. 介绍一下对`RunLoop`的认识和几种Timer★★★☆☆
+
 11. `RunLoop`和线程有什么关系? ★★★☆☆
+
 12. 猜想一下`RunLoop`内部是如何实现的? ★★★★☆
-    0C中self和super有什么关系? ★★★☆☆ 
-13. 为什么`block`可以修改使用_block修饰的局部变里昵?(延伸问题:为什么苹果没有设计成默认加上_block )★★★★☆ 
-14. `NSTimer`循环引用`self`的问题怎么解决?★★☆☆☆ 
- 15. 使用`GCD`或`UlView.animate`相关的`api`时，是否考虑引用循环问题? ★★★☆☆
-   - `GCD`的队列分为哪两种?
-   - `dispatch_barrier_async` 有什么作用? ★★★☆☆
-   - `Objective-C`的消息处理流程★★★★☆
-   - 介绍一下`iOS ResponseChain` (事件响应链)★★★★☆ 
-16. [`float`与`double`有效位，为什么](#float与double)★★★★★
+
+13. 0C中self和super有什么关系? ★★★☆☆ 
+
+14. 为什么`block`可以修改使用_block修饰的局部变里昵?(延伸问题:为什么苹果没有设计成默认加上_block )★★★★☆ 
+
+15. `NSTimer`循环引用`self`的问题怎么解决?★★☆☆☆ 
+
+ 16. 使用`GCD`或`UlView.animate`相关的`api`时，是否考虑引用循环问题? ★★★☆☆
+
+     - GCD`的队列分为哪两种?
+
+     - `dispatch_barrier_async` 有什么作用? ★★★☆☆
+
+17. 介绍一下`iOS ResponseChain` (事件响应链)★★★★☆ 
+
+18. 进程、线程和协程的区别★★☆☆☆ 
+
+#### 进阶
+
+1. `reloadData()`做了什么？（`runtime`相关）★★★★★
+2. `block` 实现原理 ★★★★★
+3. [`float`与`double`有效位，为什么](#float与double)
+4. `Objective-C`的消息处理流程★★★★☆
 
 #### 应用
 
@@ -102,6 +120,8 @@
 ## 前端
 
 #### 基础
+
+虚拟DOM与dom对比
 
 #### Vue
 
@@ -200,7 +220,11 @@ enum Optional<T> {
 
 ​	方法交换应保证在程序运行期间只执行一次，从这个角度来讲，将其放在单例，或者类的load()方法中皆可。
 
+#### swift快在哪儿
 
+1. Swift编译器中引入的`Whole Module Optimizations`优化机制.
+2. 更多的栈内存分配、更少的引用计数
+3. 更多的静态、协议类型的使用等
 
 #### KVC和KVO的keyPath—定是属性么
 
