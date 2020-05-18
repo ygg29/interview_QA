@@ -30,11 +30,11 @@
 
 ## **2、UDP 、TCP 首部格式**
 
-![img](images/TCP_UDP/v2-c01a6511abf81f867fd0e531bd51af2c_1440w.jpg)
+![img](.images/TCP_UDP/v2-c01a6511abf81f867fd0e531bd51af2c_1440w.jpg)
 
 UDP 首部字段只有 8 个字节，包括源端口、目的端口、长度、检验和。12 字节的伪首部是为了计算检验和临时添加的。
 
-![img](images/TCP_UDP/v2-3bd45a13afe868cae6225d75b85e9c36_1440w-9767809.jpg)
+![img](.images/TCP_UDP/v2-3bd45a13afe868cae6225d75b85e9c36_1440w-9767809.jpg)
 
 TCP 首部格式比 UDP 复杂。
 
@@ -90,7 +90,7 @@ ACK 是累积的，一个确认字节号 N 的 ACK 表示所有直到 N 的字�
 
 三次握手：
 
-![img](images/TCP_UDP/v2-0673bbc84fe4440aed9d1dadc67ae79b_1440w.jpg)
+![img](.images/TCP_UDP/v2-0673bbc84fe4440aed9d1dadc67ae79b_1440w.jpg)
 
 假设 A 为客户端，B 为服务器端。
 
@@ -132,7 +132,7 @@ B 收到 A 的确认后，连接建立。
 
 四次挥手：
 
-**![img](images/TCP_UDP/v2-8bf6f231cdd87b2613554f54424e8201_1440w-9767887-9767945.jpg)**
+**![img](.images/TCP_UDP/v2-8bf6f231cdd87b2613554f54424e8201_1440w-9767887-9767945.jpg)**
 
 - 客户端发送一个 FIN 段，并包含一个希望接收者看到的自己当前的序列号 K. 同时还包含一个 ACK 表示确认对方最近一次发过来的数据。
 - 服务端将 K 值加 1 作为 ACK 序号值，表明收到了上一个包。这时上层的应用程序会被告知另一端发起了关闭操作，通常这将引起应用程序发起自己的关闭操作。
@@ -184,19 +184,19 @@ B 收到 A 的确认后，连接建立。
 
 第一种情况，接收端正常收到两个数据包，即没有发生拆包和粘包的现象。
 
-![img](images/TCP_UDP/v2-1f03c5a6c04279d9c318ef48348dc32d_1440w.png)
+![img](.images/TCP_UDP/v2-1f03c5a6c04279d9c318ef48348dc32d_1440w.png)
 
 第二种情况，接收端只收到一个数据包，但是这一个数据包中包含了发送端发送的两个数据包的信息，这种现象即为粘包。这种情况由于接收端不知道这两个数据包的界限，所以对于接收端来说很难处理。
 
-![img](images/TCP_UDP/v2-e090a51ff37d6dfd1de747c70288222a_1440w.png)
+![img](.images/TCP_UDP/v2-e090a51ff37d6dfd1de747c70288222a_1440w.png)
 
 第三种情况，这种情况有两种表现形式，如下图。接收端收到了两个数据包，但是这两个数据包要么是不完整的，要么就是多出来一块，这种情况即发生了拆包和粘包。这两种情况如果不加特殊处理，对于接收端同样是不好处理的。
 
 
 
-![img](images/TCP_UDP/v2-6163805a4cbd6be0581cca82cd5ac8f5_1440w.png)
+![img](.images/TCP_UDP/v2-6163805a4cbd6be0581cca82cd5ac8f5_1440w.png)
 
-![img](images/TCP_UDP/v2-ca1d6c986cec845951dd0811f5888021_1440w.png)
+![img](.images/TCP_UDP/v2-ca1d6c986cec845951dd0811f5888021_1440w.png)
 
 **为什么会发生 TCP 粘包、拆包？**
 
@@ -220,11 +220,11 @@ TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文�
 
 一个报文段从发送再到接收到确认所经过的时间称为往返时间 RTT，加权平均往返时间 RTTs 计算如下：
 
-![img](images/TCP_UDP/v2-c55cbe9732b1a2bf9b13e63bb489a650_1440w.png)
+![img](.images/TCP_UDP/v2-c55cbe9732b1a2bf9b13e63bb489a650_1440w.png)
 
 其中，0 ≤ a ＜ 1，RTTs 随着 a 的增加更容易受到 RTT 的影响。超时时间 RTO 应该略大于 RTTs，TCP 使用的超时时间计算如下：
 
-![img](images/TCP_UDP/v2-7b92eb20e4b0fb7f0a471a06806239a8_1440w.jpg)
+![img](.images/TCP_UDP/v2-7b92eb20e4b0fb7f0a471a06806239a8_1440w.jpg)
 
 其中 RTTd 为偏差的加权平均值。
 
@@ -236,7 +236,7 @@ TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文�
 
 接收窗口只会对窗口内最后一个按序到达的字节进行确认，例如接收窗口已经收到的字节为 {31, 34, 35}，其中 {31} 按序到达，而 {34, 35} 就不是，因此只对字节 31 进行确认。发送方得到一个字节的确认之后，就知道这个字节之前的所有字节都已经被接收。
 
-![img](images/TCP_UDP/v2-b9535beef75cdd742cb5718f97029a6f_1440w.jpg)
+![img](.images/TCP_UDP/v2-b9535beef75cdd742cb5718f97029a6f_1440w.jpg)
 
 ## **10、TCP 流量控制**
 
@@ -250,7 +250,7 @@ TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文�
 
 如果网络出现拥塞，分组将会丢失，此时发送方会继续重传，从而导致网络拥塞程度更高。因此当出现拥塞时，应当控制发送方的速率。这一点和流量控制很像，但是出发点不同。流量控制是为了让接收方能来得及接收，而拥塞控制是为了降低整个网络的拥塞程度。
 
-![img](images/TCP_UDP/v2-62529f3bda992dc7035dcb13ef0da8b7_1440w.jpg)
+![img](.images/TCP_UDP/v2-62529f3bda992dc7035dcb13ef0da8b7_1440w.jpg)
 
 TCP 主要通过四个算法来进行拥塞控制：
 
@@ -265,7 +265,7 @@ TCP 主要通过四个算法来进行拥塞控制：
 
 
 
-![img](images/TCP_UDP/v2-a62edcee3fb47ed147e56bdc8001feec_1440w.jpg)
+![img](.images/TCP_UDP/v2-a62edcee3fb47ed147e56bdc8001feec_1440w.jpg)
 
 
 
@@ -291,7 +291,7 @@ TCP 主要通过四个算法来进行拥塞控制：
 
 
 
-![img](images/TCP_UDP/v2-1cc37f757263f3cd58e917059cedc7b5_1440w.jpg)
+![img](.images/TCP_UDP/v2-1cc37f757263f3cd58e917059cedc7b5_1440w.jpg)
 
 ## **12、提供网络利用率**
 
