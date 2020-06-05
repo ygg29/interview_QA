@@ -78,7 +78,7 @@
 
 1. `reloadData()`做了什么？（`runtime`相关）★★★★★
 2. `block` 实现原理 ★★★★★
-3. [`float`与`double`有效位，为什么](#float与double)
+3. [`float`与`double`有效位，为什么0.1+0.2>0.3](#float与double)
 4. `Objective-C`的消息处理流程★★★★☆
 
 #### 应用
@@ -151,21 +151,23 @@
 
 2. `HTTP`和`HTTPS`的区别★★☆☆☆
 
-3. 为 什么 `HTTPS`更安全?简述HTTPS握手过程与加密★★☆☆☆
+3. [HLS/RTSP/RTMP 三个流媒体协议的区别](#HLS/RTSP/RTMP 三个流媒体协议的区别)★★★☆☆
 
-4. Websocket 和 sockect 的区别[[简述](https://juejin.im/post/5c974855e51d4572f05e110a)]★★★★☆
+4. 为 什么 `HTTPS`更安全?简述HTTPS握手过程与加密★★☆☆☆
 
-5. `HTTP2` 了解么? ★★☆☆☆ 
+5. Websocket 和 sockect 的区别[[简述](https://juejin.im/post/5c974855e51d4572f05e110a)]★★★★☆
 
-6. 什么是中间人攻击？★★★☆☆
+6. `HTTP2` 了解么? ★★☆☆☆ 
 
-7. Dns 解析的风险 劫持跟踪和欺诈★★★★☆
+7. 什么是中间人攻击？★★★☆☆
 
-8. [HTTP的三次握手和四次挥手以及为什么挥手是四次？](#HTTP的三次握手和四次挥手以及为什么挥手是四次)★★★☆☆
+8. Dns 解析的风险 劫持跟踪和欺诈★★★★☆
 
-9. 在浏览器地址栏里输入一个`URL`到显示出页面，中间都发生了什么? ★★★★☆
+9. [HTTP的三次握手和四次挥手以及为什么挥手是四次？](#HTTP的三次握手和四次挥手以及为什么挥手是四次)★★★☆☆
 
-    
+10. 在浏览器地址栏里输入一个`URL`到显示出页面，中间都发生了什么? ★★★★☆
+
+     
 
 ## 设计模式 & 架构
 
@@ -220,11 +222,33 @@ enum Optional<T> {
 
 ​	方法交换应保证在程序运行期间只执行一次，从这个角度来讲，将其放在单例，或者类的load()方法中皆可。
 
+
+
 #### swift快在哪儿
 
-1. Swift编译器中引入的`Whole Module Optimizations`优化机制.
-2. 更多的栈内存分配、更少的引用计数
-3. 更多的静态、协议类型的使用等
+swift更快时相比于OC来说的，表现在编译期、函数派发、内存布局上的速度提升
+
+1. 编译期
+
+   swift 采用的是类似 C++ 的编译时的多态技术，相比于运行时多态技术，会减少一些额外的计算，缺点是会使二进制包大一些
+
+   swift编译过程中，生成的SIL中间语言会对swift有针对性的优化（swift编译过程：swift->SIL->LLVM IR->汇编->二进制文件，其中IR中间代码与语言无关，为swift跨平台提供了可能）
+
+2. 函数派发
+
+   swift 支持静态派发，函数表派发， messageSend 机制派发 
+
+   静态派发又叫直接派发，函数在编译期就确定了地址，swift中 extension里的函数就是直接派发，还有一些编译期优化的inline函数也是直接派发
+
+   函数表派发主要通过v-table（swift中叫witnessTable）派发
+
+   messageSend OC中通过cacheList可以达到和函数表派发效率差不多的效果
+
+3. 内存布局
+
+   swift 中大量使用struct ，因为struct是栈区内存管理，栈区的数据操作直接通过cpu提供的指令寄存器，天然比堆区内存快很多
+
+   
 
 #### KVC和KVO的keyPath—定是属性么
 
@@ -248,19 +272,26 @@ enum Optional<T> {
 > **App初始化流程**:
 >
 > 1. `main` 函数
->
-> 2. 执行`UIApplicationMain`      
->
+>2. 执行`UIApplicationMain`      
 > 3. 1. 创建`UIApplication`对象
->    2. 创建`UIApplication`的`delegate`对象
+>   2. 创建`UIApplication`的`delegate`对象
 >    3. 创建`MainRunloop`
 >    4.  `delegate`对象开始处理(监听)系统事件(没有`storyboard`)
->
 > 4. 根据`Info.plist`获得最主要`storyboard`的文件名,加载最主要的`storyboard`(有`storyboard`)
->
 > 5. 程序启动完毕的时候,  就会调用代理的`application:didFinishLaunchingWithOptions:`方法在`application:didFinishLaunchingWithOptions:`中创建`UIWindow` 创建和设置`UIWindow`的rootViewController
->
-> 6. 最终显示第一个窗口
+>6. 最终显示第一个窗口
+
+优化主要分为三块：
+
+1. 启动优化
+2. 运行时优化
+3. 资源优化
+
+启动优化主要在库的使用上， 尽量使用系统库，而且减少库的数量，比如将多个库进行合并
+
+运行时优化，比如UITableView的优化，主线程的优化（主要减少主线程的耗时操作）等
+
+资源优化，在于减少安装包大小，如清理无用图片，使用webP图片格式，注释掉不用代码，剔除重复代码（比较二进制码中function的汉明距离），大资源文件（表情包）下载后使用等。
 
 
 
@@ -283,6 +314,19 @@ OC真的太老了，作为一个从上个世纪修修补补流传下来的语言
 - **悬垂指针**：当所指向的对象被释放或者收回，但是对该指针没有作任何的修改，以至于该指针仍旧指向已经回收的内存地址，此情况下该指针便称**悬垂指针**（也叫**迷途指针**）。
 
 - **野指针：**某些编程语言允许**未初始化**的指针的存在，而这类指针即为**野指针**。
+
+
+
+#### HLS/RTSP/RTMP 三个流媒体协议的区别
+
+HLS（ HTTP Live Streaming）苹果公司提出的流媒体协议，直接把流媒体切片成一段段，信息保存到 m3u 列表文件中，可以将不同速率的版本切成相应的片。播放器可以直接使用 HTTP 协议请求流数据，可以在不同速率的版本间自由切换，实现无缝播放，省去使用其他协议的烦恼。缺点是延迟大小受切片大小影响，不适合直播，适合视频点播。
+
+RTSP （Real-Time Stream Protocol）由 Real Networks 和 Netscape 共同提出的，基于文本的多媒体播放控制协议。RTSP 定义流格式，流数据经由 RTP 传输。RTSP 实时效果非常好，适合视频聊天、视频监控等方向。
+
+RTMP（Real Time Message Protocol） 由 Adobe 公司提出，用来解决多媒体数据传输流的多路复用（Multiplexing）和分包（packetizing）的问题，优势在于低延迟，稳定性高，支持所有摄像头格式，浏览器加载 Flash 插件就可以直接播放。
+
+总结：
+HLS 延迟大，适合视频点播；RTSP 虽然实时性最好，但是实现复杂，适合视频聊天和视频监控；RTMP 强在浏览器支持好，加载Flash 插件后就能直接播放，所以非常火，相反在浏览器里播放 RTSP 就很困难了。
 
 
 
