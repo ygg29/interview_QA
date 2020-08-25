@@ -33,7 +33,7 @@
 7. 闭包与函数的区别★★☆☆☆ 
 8. [`optional`原理与实现机制](#optional原理与实现机制) ★★☆☆☆ 
 9. 定义静态方法时关键字`static`和`class`有什么区别? ★☆☆☆☆ 
-10. `Swift`中的`Error`与`OC`的`NSError`相互转化时发生了什么? ★★★☆☆ 
+10. [`Swift`中的`Error`与`OC`的`NSError`相互转化时发生了什么?](#`Swift`中的`Error`与`OC`的`NSError`相互转化时发生了什么? )★★★☆☆ 
 11. `Swift method dispatch` ★★★☆☆ 
 12. [swift 单例的实现，是如何保证线程安全的](https://juejin.im/post/59e30701f265da432f3026ad)★★☆☆☆ 
 13. [关于swift与OC多说两句](#关于swift与OC多说两句)
@@ -41,22 +41,24 @@
 #### 基础
 
 1. `weak` 和 `assign` ★★☆☆☆
-2. [悬垂指针、野指针分别指什么？](#悬垂指针、野指针分别指什么)
-3. `weak`原理和实现★★★☆☆
-4. 什么时候使用`copy`修饰符? ★★☆☆☆
-5. `property(copy, nonautomic) NSMutableArray *array`;会出现什么问题? ★★☆☆☆ 
-6. 介绍一下对深拷贝和浅拷贝的理解★★★☆☆ 
-7. `ARC`和 `MRC`的 区 别 ★★★☆☆ 
-8. `ARC`和 `GC`的 区 別 ★★★☆☆
+2. `alloc` 与 `init` 分别作了什么？★★☆☆☆
+3. [悬垂指针、野指针分别指什么？](#悬垂指针、野指针分别指什么)
+4. `weak`原理和实现★★★☆☆
+5. 什么时候使用`copy`修饰符? ★★☆☆☆
+6. `property(copy, nonautomic) NSMutableArray *array`;会出现什么问题? ★★☆☆☆ 
+7. 介绍一下对深拷贝和浅拷贝的理解★★★☆☆ 
+8. `ARC`和 `MRC`的 区 别 ★★★☆☆ 
+9. `ARC`和 `GC`的 区 別 ★★★☆☆
+
   - 平时怎么使用 `AutoreleasePool`? ★★★☆☆
   - 不手动指定`AutoreleasePool`的前提下，一个`AutoreleasePool`对象在什么时刻释放? (比如在一个VC的`viewDidLoad`中创建的局部变里) ★ ★ ★ ☆ ☆ 
 9. `AutoreleasePool` 和 `RunLoop` 有什么关系? ★★★★☆
 10. [是不是所有对象都有`pool`进行管理，什么对象由`pool`进行管理？](#是不是所有对象都有`pool`进行管理，什么对象由`pool`进行管理？)
-11. 介绍一下对`RunLoop`的认识和几种Timer★★★☆☆
+11. 介绍一下对`RunLoop`的认识和几种[Timer](https://www.cnblogs.com/xyq-208910/p/6590829.html)★★★☆☆
 12. `RunLoop`和线程有什么关系? ★★★☆☆
 13. 猜想一下`RunLoop`内部是如何实现的? ★★★★☆
-14. 0C中self和super有什么关系? ★★★☆☆ 
-15. 为什么`block`可以修改使用_block修饰的局部变里昵?(延伸问题:为什么苹果没有设计成默认加上_block )★★★★☆ 
+14. 0C中self和super有什么关系? ★★★☆☆
+15. 为什么`block`可以修改使用block修饰的局部变里昵?(延伸问题:为什么苹果没有设计成默认加上_block )★★★★☆ 
 16. `NSTimer`循环引用`self`的问题怎么解决?★★☆☆☆ 
  17. 使用`GCD`或`UlView.animate`相关的`api`时，是否考虑引用循环问题? ★★★☆☆
 
@@ -70,10 +72,14 @@
 #### 进阶
 
 1. `reloadData()`做了什么？（`runtime`相关）★★★★★
-2. `block` 实现原理 ★★★★★
+2. [`block` 实现原理](#block 实现原理) ★★★★★
 3. [`float`与`double`有效位，为什么0.1+0.2>0.3](#float与double)
 4. `Objective-C`的消息处理流程★★★★☆
 5. [`atomic` 实现原理，及使用atomic是否能保证线程安全?](#atomic 实现原理，及使用atomic是否能保证线程安全?)★★★☆☆
+6. 渲染 jpeg 时怎么知道内存大小★★★★☆
+7. 如何设计一个运行时检测内存泄漏的框架★★★★☆
+8. 进程间通信的常用方式★★★☆☆
+9. [什么是优先级反转？如何解决](#优先级反转)？★★★★☆
 
 #### 应用
 
@@ -81,7 +87,7 @@
 2. [`KVC`和`KVO`的`keyPath` —定是属性么?](#KVC和KVO的keyPath—定是属性么) ★★★☆☆ 
 3. OC语言如何是管理内存? 如何检测内存泄漏? 有几种方式？
 4. `IBOutlet`连出来的视图属性为什么可以被设置成`weak` ?★★☆☆☆ 
-5. `layoutSubviews` 调用时机★★★☆☆ 
+5. [`layoutSubviews` 调用时机](#layoutSubviews在以下情况下会被调用)★★★☆☆ 
 6. `drawRect` 调用时机★★★☆☆
 7. `lldb(gdb)`常用的调试命令? ★★★☆☆ 
 8. 对比一下`GPU`和`CPU`绘制情况★★★☆☆ 
@@ -123,6 +129,8 @@
 
 7. 快速排序是否稳定? 能否手写快排★★★★☆
 
+8. 计算一个二叉树的最大深度与最大广度★☆☆☆☆
+
     
 
 ## 网络相关知识
@@ -147,13 +155,15 @@
 
 10. 在浏览器地址栏里输入一个`URL`到显示出页面，中间都发生了什么? ★★★★☆
 
+11. [TCP 如何保证可靠性的？](#TCP 的可靠性如何保证)★★★☆☆
+
      
 
 ## 设计模式 & 架构
 
 1. **`MVC`、`MVVM`、`VIPER`** 优缺点★★★☆☆ 
 
-2. 工程组件化方案★★★★☆ 
+2. 工程组件化方案★★★★☆
 
 3. 简单工厂和抽象工厂的区别★★★☆☆ 
 
@@ -252,14 +262,14 @@ swift更快时相比于OC来说的，表现在编译期、函数派发、内存�
 > **App初始化流程**:
 >
 > 1. `main` 函数
->2. 执行`UIApplicationMain`      
-> 3. 1. 创建`UIApplication`对象
+> 2. 执行`UIApplicationMain`      
+> 3. 创建`UIApplication`对象
 >   2. 创建`UIApplication`的`delegate`对象
 >    3. 创建`MainRunloop`
 >    4.  `delegate`对象开始处理(监听)系统事件(没有`storyboard`)
 > 4. 根据`Info.plist`获得最主要`storyboard`的文件名,加载最主要的`storyboard`(有`storyboard`)
 > 5. 程序启动完毕的时候,  就会调用代理的`application:didFinishLaunchingWithOptions:`方法在`application:didFinishLaunchingWithOptions:`中创建`UIWindow` 创建和设置`UIWindow`的rootViewController
->6. 最终显示第一个窗口
+> 6. 最终显示第一个窗口
 
 优化主要分为三块：
 
@@ -400,9 +410,11 @@ threadA 在执行表达式 self.intA之后 self.intA = self.intA + 1;并没有�
 
 所以仅仅使用atomic并不能保证线程安全。
 
+
+
 #### 是不是所有对象都有`pool`进行管理，什么对象由`pool`进行管理？
 
-- 当使用`alloc/new/copy/mutableCopy`开始的方法进行初始化时，会生成并持有对象(也就是不需要`pool`管理，系统会自动的帮他在合适位置`release`), 对于类方法，及一些工厂方法，或对象作为其他方法的返回值，则由autoreleasepool管理。
+- 当使用`alloc/new/copy/mutableCopy`开始的方法进行初始化时，会**生成并持有对象**(也就是不需要`pool`管理，系统会自动的帮他在合适位置`release`)；对于类方法，及一些工厂方法，或对象作为其他方法的返回值，则由autoreleasePool管理。
 
 - `__weak`修饰符只持有对象的弱引用，而在访问引用对象的过程中，该对象可能被废弃。那么如果把对象注册到`autorealeasepool`中，那么在`@autorealeasepool`块结束之前都能确保对象的存在。
 
@@ -425,4 +437,112 @@ threadA 在执行表达式 self.intA之后 self.intA = self.intA + 1;并没有�
   > dispatch_barrier_asynca、dispatch_semaphore...
 
 [参考](https://juejin.im/post/5bf21d935188251d9e0c2937)
+
+#### `Swift`中的`Error`与`OC`的`NSError`相互转化时发生了什么?
+
+Error 只是一个protocol，不提供实现， NSError为继承自NSObject的class。
+
+
+
+#### layoutSubviews在以下情况下会被调用
+
+1. init初始化不会触发layoutSubviews
+    但是是用initWithFrame 进行初始化时，当rect的值不为CGRectZero时,也会触发
+
+2. addSubview会触发layoutSubviews
+
+3. 设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化
+
+4. 滚动一个UIScrollView会触发layoutSubviews
+
+5. 旋转Screen会触发父UIView上的layoutSubviews事件
+
+6. 改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件
+
+在苹果的官方文档中强调:
+
+```kotlin
+  You should override this method only if the autoresizing behaviors of the subviews do not offer the behavior you want.
+```
+
+> layoutSubviews, 当我们在某个类的内部调整子视图位置时，需要调用。
+>  反过来的意思就是说：如果你想要在外部设置subviews的位置，就不要重写。
+
+
+
+#### block 实现原理
+
+block 通过 struct 实现， 其中含有 isa 指针，本质上是个结构体。
+
+block 共有三种类型，`_NSGlobalBlock__`、`__NSStackBlock__`、`__NSMallocBlock__`，根据捕获变量类型进行区分
+
+_NSGlobalBlock__：存储在静态区， 捕获静态局部或者全局变量
+
+_NSStackBlock__：存储在栈区，捕获局部变量
+
+_NSMallocBlock__: 存储在堆区，编译器会根据情况复制栈区 block 到堆区，分为以下四种情况
+
+- **Block作为函数返回值时**
+- **将block赋值给强指针时**
+- **当block作为参数传给Cocoa API时**
+- **block作为GCD的API的参数时**
+
+
+
+#### 优先级反转
+
+1. 什么是优先级反转(Priority Inversion)
+   由于多进程共享资源，具有最高优先权的进程被低优先级进程阻塞，反而使具有中优先级的进程先于高优先级的进程执行，导致系统的崩溃。这就是所谓的优先级反转(Priority Inversion)。
+
+2. 产生原因
+    其实,优先级反转是在高优级(假设为A)的任务要访问一个被低优先级任务(假设为C)占有的资源时,被阻塞.而此时又有优先级高于占有资源的任务(C)而低于被阻塞的任务(A)的优先级的任务(假设为B)时,于是,占有资源的任务就被挂起(占有的资源仍为它占有),因为占有资源的任务优先级很低,所以,它可能一直被另外的任务挂起.而它占有的资源也就一直不能释放,这样,引起任务A一直没办法执行.而比它优先低的任务却可以执行.  
+
+3. 解决方案 ( 优先级继承 / 优先级天花板 )
+
+
+   目前解决优先级反转有许多种方法。其中普遍使用的有2种方法：一种被称作优先级继承(priority inheritance)；另一种被称作优先级极限(priority ceilings)。
+
+    A. 优先级继承(priority inheritance) 
+    优先级继承是指将低优先级任务的优先级提升到等待它所占有的资源的最高优先级任务的优先级.当高优先级任务由于等待资源而被阻塞时,此时资源的拥有者的优先级将会自动被提升.  
+
+    B. 优先级天花板(priority ceilings)
+    优先级天花板是指将申请某资源的任务的优先级提升到可能访问该资源的所有任务中最高优先级任务的优先级.(这个优先级称为该资源的优先级天花板)  
+
+
+
+#### app 进程间通信方式
+
+- URL Scheme
+
+- Keychain
+
+- UIPasteboard
+
+- UIDocumentInteractionController
+
+- local socket
+
+- AirDrop
+
+- UIActivityViewController
+
+- App Groups
+
+  [详情](https://blog.csdn.net/kuangdacaikuang/article/details/78891379#1-url-scheme)
+
+#### TCP 的可靠性如何保证
+
+- 检验和
+
+- 超时重传
+
+- 最大消息长度
+
+- 滑动窗口控制
+
+- 拥塞控制
+
+- 慢启动
+
+  [详解](https://zhuanlan.zhihu.com/p/112317245)
 
