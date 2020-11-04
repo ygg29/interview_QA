@@ -277,36 +277,26 @@ swift更快时相比于OC来说的，表现在编译期、函数派发、内存�
 
 #### App优化
 
-> **App启动流程：** 
->
+![](./.images/App优化.png)
+
+**App启动流程：** 
+
 > 1. 加载info.plist
-> 2. 创建沙盒
+>2. 创建沙盒
 > 3. 权限检查
 > 4. 库链接
->
-> **App初始化流程**:
->
+
+**App初始化流程:**
+
 > 1. `main` 函数
-> 2. 执行`UIApplicationMain`      
+>2. 执行`UIApplicationMain`      
 > 3. 创建`UIApplication`对象
 >   2. 创建`UIApplication`的`delegate`对象
 >    3. 创建`MainRunloop`
 >    4.  `delegate`对象开始处理(监听)系统事件(没有`storyboard`)
-> 4. 根据`Info.plist`获得最主要`storyboard`的文件名,加载最主要的`storyboard`(有`storyboard`)
+>4. 根据`Info.plist`获得最主要`storyboard`的文件名,加载最主要的`storyboard`(有`storyboard`)
 > 5. 程序启动完毕的时候,  就会调用代理的`application:didFinishLaunchingWithOptions:`方法在`application:didFinishLaunchingWithOptions:`中创建`UIWindow` 创建和设置`UIWindow`的rootViewController
-> 6. 最终显示第一个窗口
-
-优化主要分为三块：
-
-1. 启动优化
-2. 运行时优化
-3. 资源优化
-
-启动优化主要在库的使用上， 尽量使用系统库，而且减少库的数量，比如动态库转换为静态库和将多个库进行合并
-
-运行时优化，比如UITableView的优化，主线程的优化（主要减少主线程的耗时操作）等
-
-资源优化，在于减少安装包大小，如清理无用图片，使用webP图片格式，注释掉不用代码，剔除重复代码（比较二进制码中function的汉明距离），大资源文件（表情包）下载后使用等。
+>6. 最终显示第一个窗口
 
 
 
