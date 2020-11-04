@@ -241,29 +241,9 @@ enum Optional<T> {
 
 #### swift快在哪儿
 
-swift更快时相比于OC来说的，表现在编译期、函数派发、内存布局上的速度提升
+![](./.images/swift为什么更快.png)
 
-1. 编译期
 
-   swift 采用的是类似 C++ 的编译时的多态技术，相比于运行时多态技术，会减少一些额外的计算，缺点是会使二进制包大一些
-
-   swift编译过程中，生成的SIL中间语言会对swift有针对性的优化（swift编译过程：swift->SIL->LLVM IR->汇编->二进制文件，其中IR中间代码与语言无关，为swift跨平台提供了可能）
-
-2. 函数派发
-
-   swift 支持静态派发，函数表派发， messageSend 机制派发 
-
-   静态派发又叫直接派发，函数在编译期就确定了地址，swift中 extension里的函数就是直接派发，还有一些编译期优化的inline函数也是直接派发
-
-   函数表派发主要通过v-table（swift中叫witnessTable）派发
-
-   messageSend OC中通过cacheList可以达到和函数表派发效率差不多的效果
-
-3. 内存布局
-
-   swift 中大量使用struct ，因为struct是栈区内存管理，栈区的数据操作直接通过cpu提供的指令寄存器，天然比堆区内存快很多
-
-   
 
 #### KVC和KVO的keyPath—定是属性么
 
