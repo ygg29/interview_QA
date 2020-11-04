@@ -310,12 +310,6 @@ swift更快时相比于OC来说的，表现在编译期、函数派发、内存�
 
 
 
-#### 关于swift与OC多说两句
-
-OC真的太老了，作为一个从上个世纪修修补补流传下来的语言，从命名都感觉出是仓促上马的项目。没有C的效率，没有Java的灵活，没有C++的类型安全，甚至对于泛型的支持都乏善可陈。使用OC的过程中，从头到尾都有一种“这种特性比较牛逼，但是我们实现不了，来加个库打个补丁吧”的割裂感，一面为了让语言的功能更强大给语言添加上动态性runtime，一面又不支持开发者对于runtime的过度使用，连函数派发的方式都匪夷所思。不过还好Apple趁着还身强体壮又要了一个Swift，所以我面试的时候一定会问“贵公司的项目是用跟shit一样的OC写的吗？”QAQ
-
-
-
 #### HTTP的三次握手和四次挥手以及为什么挥手是四次
 
 之所以握手三次，是因为在第二次握手中，服务器同时将syn与ack发送给客户端，即将两次握手过程在一次完成
@@ -463,6 +457,8 @@ threadA 在执行表达式 self.intA之后 self.intA = self.intA + 1;并没有�
 
 [参考](https://juejin.im/post/5bf21d935188251d9e0c2937)
 
+
+
 #### `Swift`中的`Error`与`OC`的`NSError`相互转化时发生了什么?
 
 Error 只是一个protocol，不提供实现， NSError为继承自NSObject的class。
@@ -554,6 +550,8 @@ _NSMallocBlock__: 存储在堆区，编译器会根据情况复制栈区 block �
 - App Groups
 
   [详情](https://blog.csdn.net/kuangdacaikuang/article/details/78891379#1-url-scheme)
+  
+  
 
 #### TCP 的可靠性如何保证
 
@@ -570,6 +568,8 @@ _NSMallocBlock__: 存储在堆区，编译器会根据情况复制栈区 block �
 - 慢启动
 
   [详解](https://zhuanlan.zhihu.com/p/112317245)
+  
+  
 
 #### OC支持方法重载吗？为什么？
 
