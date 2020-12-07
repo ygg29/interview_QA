@@ -18,7 +18,6 @@
     - [swift快在哪儿](#swift快在哪儿)
     - [KVC和KVO的keyPath—定是属性么](#kvc和kvo的keypath定是属性么)
     - [App优化](#app优化)
-    - [关于swift与OC多说两句](#关于swift与oc多说两句)
     - [HTTP的三次握手和四次挥手以及为什么挥手是四次](#http的三次握手和四次挥手以及为什么挥手是四次)
     - [悬垂指针、野指针分别指什么](#悬垂指针野指针分别指什么)
     - [HLS/RTSP/RTMP/WebRTC流媒体协议的区别](#hlsrtsprtmpwebrtc流媒体协议的区别)
@@ -103,6 +102,7 @@
 12. RXSwift实现原理，如何完成双向绑定？★★★★☆
 13. CoreGraphic 能否使用多线程进行绘制？★★★★☆
 14. retainCount 保存在哪里？★★★★☆
+15. 指针优化★★★★☆
 
 #### 应用
 
@@ -546,3 +546,14 @@ _NSMallocBlock__: 存储在堆区，编译器会根据情况复制栈区 block �
 OC 不持之方法重载。
 
 这是由 OC 中方法的查找过程决定的，OC 中在 methodList 查找到对应方法后便后返回，并不会去验证方法的参数类型和个数。
+
+
+
+#### iOS指针优化
+
+- Tagged pointer
+
+  
+
+- isa指针优化
+
