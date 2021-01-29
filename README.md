@@ -60,7 +60,7 @@
 3. [悬垂指针、野指针分别指什么？](#悬垂指针、野指针分别指什么)
 4. `weak`原理和实现★★★☆☆
 5. 什么时候使用`copy`修饰符? ★★☆☆☆
-6.  @synchronized 原理★★★☆☆ 
+6.  @synchronized 原理★★★★☆ 
 7. `property(copy, nonautomic) NSMutableArray *array`;会出现什么问题? ★★☆☆☆ 
 8. 介绍一下对深拷贝和浅拷贝的理解★★★☆☆ 
 9. `ARC`和 `MRC`的区别 ★★★☆☆ 
@@ -557,3 +557,4 @@ OC 不持之方法重载。
 
 - isa指针优化
 
+​    
